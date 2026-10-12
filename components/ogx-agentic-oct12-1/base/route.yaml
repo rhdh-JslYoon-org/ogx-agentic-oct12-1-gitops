@@ -1,0 +1,23 @@
+# Route for Streamlit UI Application (OpenShift)
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  labels:
+    app.kubernetes.io/instance: ogx-agentic-oct12-1
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: ogx-agentic-oct12-1
+  name: ogx-agentic-oct12-1
+spec:
+  port:
+    targetPort: 8501
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: edge
+  to:
+    kind: Service
+    name: ogx-agentic-oct12-1
+    weight: 100
+  wildcardPolicy: None
+
